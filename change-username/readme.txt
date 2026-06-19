@@ -1,36 +1,41 @@
 === Change Username ===
 Contributors: Ibericode, DvanKooten
-Tags: username, login, change username, change login
-Requires at least: 4.1
-Tested up to: 6.6
-Stable tag: 1.0.2
+Tags: username, users, login, user management, multisite
+Tested up to: 7.0
+Stable tag: 1.0.3
 License: GPL-3.0-or-later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
-Requires PHP: 7.2
+Requires at least: 6.0
+Requires PHP: 7.4
 
-Change usernames of your WordPress users effectively.
+Change WordPress usernames from the user edit screen, with validation for existing users, illegal logins, and Multisite admins.
 
 == Description ==
 
 ## Change Username
 
-This plugin allows you to change usernames of your WordPress users in an effective and safe way.
+WordPress does not let administrators change usernames by default. Change Username adds that option directly to the existing user edit screen, without a separate settings page.
 
-By default, WordPress itself does not allow usernames to be changed. The other plugins for changing usernames do not scale all that well for sites with a large number of users.
+Use it to update a WordPress username while keeping the same user ID, posts, comments, and profile data attached to the account.
 
-This plugin takes a different approach by simply enhancing the default "edit user" page and then processing the username change over AJAX, resulting in a much faster and user-friendly experience.
+### Features 
 
+- Change any WordPress username from the existing user edit screen.
+- Prevent username conflicts by checking whether the new username already exists.
+- Block usernames that are listed as illegal logins.
+- Follow the same username validation rules as WordPress core.
+- Retain superadmin rights when changing the username of a Multisite super admin.
 
-### Requirements
+### Requirements 
 
-- PHP version 7.2 or higher
-- WordPress version 4.1 or higher
+- PHP version 7.4 or higher
+- WordPress version 6.0 or higher
 
+### About the plugin author 
 
-### About the author
+[Danny van Kooten](https://www.dannyvankooten.com/) has been building WordPress plugins since 2010, starting with WordPress 3.0.
 
-Danny van Kooten has been developing plugins for WordPress since version 3.0, all the way back in 2010. Read more about him on [his personal website](https://www.dannyvankooten.com/) or have a look at his various other [WordPress plugins](https://dannyvankooten.com/wordpress-plugins/).
-
+He is the founder of [ibericode](https://www.ibericode.com/), the small software company behind popular WordPress plugins including [Mailchimp for WordPress](https://wordpress.org/plugins/mailchimp-for-wp/) and [Koko Analytics](https://wordpress.org/plugins/koko-analytics/).
 
 == Installation ==
 
@@ -38,28 +43,51 @@ Danny van Kooten has been developing plugins for WordPress since version 3.0, al
 1. In your WordPress admin panel, go to *Plugins > New Plugin*, search for **Change Username** and click "*Install now*"
 1. Alternatively, download the plugin and upload the contents of `change-username.zip` to your plugins directory, which usually is `/wp-content/plugins/`.
 1. Activate the plugin
+1. Go to *Users*, edit a user, and change the username from the existing user edit screen.
 
 == Frequently Asked Questions ==
 
-#### Where is the settings page?
+#### Where do I change a WordPress username after activation?
 
-Change Username does not come with its own settings page. You can change the username of your users on the page where you would normally edit that user.
+Go to *Users*, open the user you want to edit, and use the username control on the existing user edit screen.
+
+#### Can I change an administrator username?
+
+Yes. Any user with the `edit_users` capability can change usernames, including administrator usernames.
 
 #### Can users change their own username?
 
-Not right now. Only logged-in users with the `edit_users` capability can change usernames.
+Not right now. Only administrators with the `edit_users` capability can change usernames.
 
-#### Can I use this plugin on MultiSite?
+#### Does changing a username affect user IDs or posts?
 
-Yes.
+No. The plugin changes the user's login name, but it does not change the user ID. Existing posts, pages, comments, and user metadata stay assigned to the same user account.
+
+#### Does this work on WordPress Multisite?
+
+Yes. When changing the username of a Multisite super admin, the plugin keeps that user in the super admin list.
+
+#### I've activated the plugin but nothing happens.
+
+Please check if your server is running PHP version 7.4 or higher. The plugin will not do anything if you're on an older version of PHP.
 
 
 == Screenshots ==
 
-1. What changing a username with this plugin looks like.
-
+1. Change a WordPress username from the default user edit screen.
 
 == Changelog ==
+
+
+#### 1.0.3 - Jun 19, 2026
+
+- Bump required PHP version to 7.4 or higher.
+- Bump required WordPress version to 6.0 or higher.
+- Bump tested WordPress version to 7.0.
+- Fix retaining Multisite super admin rights when the user is first in the super admin list.
+- Improve sanitization of submitted username values.
+- Add PHPCS and PHPStan checks to the release process.
+- Exclude Makefile from plugin release packages.
 
 
 #### 1.0.2 - Oct 04, 2024
